@@ -3,9 +3,19 @@ const router = express.Router();
 const Controller = require("../controllers/polls");
 const helper = require("../helpers");
 
+// (GET) Get all polls
 router.get("/", Controller.getAllPolls);
+
+// (POST) Create new poll
 router.post("/", helper.isAuthenticated, Controller.createNewPoll);
+
+// (GET) Get Poll By Poll Id
 router.get("/:id", Controller.getPollByPollId);
+
+// (GET) Get Polls By User Id
 router.get("/user/:id", Controller.getPollsByUserId);
+
+// (DELETE) Delete poll by id
 router.delete("/:id", helper.isAuthenticated, Controller.deleteOnePollById);
+
 module.exports = router;
