@@ -1,8 +1,10 @@
-const express = require("express");
-const router = express.Router();
+const router = require("express").Router();
 const Controller = require("../controllers/options");
-const helper = require("../helpers");
+const Helpers = require("../helpers/index");
 
-router.post("/", Controller.createNewOption);
+router.post("/", Helpers.isAuthenticated, Controller.createNewOption);
+router.put("/:id", Helpers.isAuthenticated, Controller.updateOption);
+router.delete("/:id", Helpers.isAuthenticated, Controller.deleteOneOption);
+router.get("/", Controller.getAllOption);
 
 module.exports = router;
