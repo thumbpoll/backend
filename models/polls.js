@@ -18,7 +18,7 @@ const pollSchema = Schema(
     },
     moderator: {
       type: Schema.Types.ObjectId,
-      ref: "users"
+      ref: "Users"
     },
     options: [
       {
@@ -40,20 +40,3 @@ pollSchema.plugin(AutoIncrement, {
 const Polls = mongoose.model("Polls", pollSchema);
 
 module.exports = Polls;
-
-// {
-//   title: String,
-//   timeLimit: Date,
-//   options: [
-//     {
-//       optionId: Number,
-//       description: String,
-//       image: String,
-//       voters: [
-//         {
-//           userId: Number
-//         }
-//       ]
-//     }
-//   ]
-// },

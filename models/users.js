@@ -20,7 +20,7 @@ const userSchema = Schema(
     polls: [
       {
         type: Schema.Types.ObjectId,
-        ref: "polls"
+        ref: "Polls"
       }
     ]
   },

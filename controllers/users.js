@@ -129,7 +129,6 @@ const usersControllers = {
       });
     }
   },
-
   // UPDATE ONE USER BY ID
   updateOneUserById: async (req, res) => {
     const userFound = await User.findOne({ id: Number(req.params.id) });
