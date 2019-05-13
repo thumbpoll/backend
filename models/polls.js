@@ -22,8 +22,8 @@ const pollSchema = Schema(
     },
     options: [
       {
-        description: String,
-        image: String
+        type: Schema.Types.ObjectId,
+        ref: "Options"
       }
     ]
   },
