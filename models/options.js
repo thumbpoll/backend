@@ -2,6 +2,7 @@ const mongoose = require("../config/config");
 const Schema = mongoose.Schema;
 const AutoIncrement = require("mongoose-sequence")(mongoose);
 
+// CREATE OPTION
 const optionSchema = Schema({
   description: {
     type: String,

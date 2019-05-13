@@ -1,10 +1,15 @@
 require("dotenv").config();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const express = require("express");
 const app = express();
 
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send({
+    message: "Hello Thumbpoll"
+  });
+});
 const users = require("./routes/usersRouter");
 app.use("/users", users);
 const polls = require("./routes/pollsRouter");
