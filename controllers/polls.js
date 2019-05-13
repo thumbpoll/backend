@@ -78,11 +78,19 @@ module.exports = {
     const pollFound = await Poll.findOne({ id: Number(req.params.id) });
 
     if (pollFound) {
-      const poll = await Poll.findOneAndRemove({ id: Number(req.params.id) });
+      console.log(pollFound);
+      const resultPoll = await Poll.findOneAndRemove({
+        id: Number(req.params.id)
+      });
+
+      const resultArrayPoll = await User.findOneAndUpdate(
+        { _id: pollFound.moderator },
+        { $pull: { polls: pollFound._id } }
+      );
 
       res.send({
         message: "Delete one poll by id",
-        user: poll
+        poll: resultPoll
       });
     } else {
       res.send({
