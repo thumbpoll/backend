@@ -1,23 +1,24 @@
-// const Option = require("../models/option");
-// const User = require("../models/users");
-// const helpers = require("../helpers");
+const Option = require("../models/options");
+const User = require("../models/users");
+const helpers = require("../helpers");
 
 module.exports = {
-  // createNewOption: async (req, res) => {
-  //   try {
-  //     const option = await Option.create({
-  //       description: req.body.description
-  //     });
-  //     res.status(200).send({
-  //       message: `Create option success`,
-  //       data: option
-  //     });
-  //   } catch (error) {
-  //     res.status(500).send({
-  //       message: `Create option error`
-  //     });
-  //   }
-  // },
+  createNewOption: async (req, res) => {
+    try {
+      const option = await Option.create({
+        description: req.body.description,
+        pollId: req.body.pollId
+      });
+      res.status(200).send({
+        message: `Create option success`,
+        data: option
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: `Create option error`
+      });
+    }
+  }
   // updateOption: async (req, res) => {
   //   try {
   //     const updateOption = await Option.update(
