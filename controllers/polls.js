@@ -101,5 +101,27 @@ module.exports = {
         message: "Id poll is not found"
       });
     }
+  },
+  updatePollbyId: async (req, res) => {
+    try {
+      const pollFound = await Poll.findOneAndUpdate(
+        { id: req.params.id },
+        {
+          $set: {
+            title: req.body.title,
+            timeLimit: req.body.timeLimit
+          }
+        }
+      );
+
+      res.status(200).send({
+        message: `Update Poll success`,
+        data: pollFound
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: `Update Polls Error`
+      });
+    }
   }
 };
