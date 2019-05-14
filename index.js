@@ -12,8 +12,10 @@ app.get("/", (req, res) => {
 });
 const users = require("./routes/usersRouter");
 app.use("/users", users);
+
 const polls = require("./routes/pollsRouter");
 app.use("/polls", polls);
+
 const options = require("./routes/optionsRouter");
 app.use("/options", options);
 

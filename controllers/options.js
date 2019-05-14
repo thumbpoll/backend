@@ -1,6 +1,4 @@
-const Option = require("../models/option");
-const User = require("../models/users");
-const helpers = require("../helpers");
+const Option = require("../models/options");
 
 module.exports = {
   createNewOption: async (req, res) => {
@@ -69,26 +67,26 @@ module.exports = {
   }
 };
 
-// const decodedToken = await helpers.verifyToken(req.token);
-// const newOption = {
-//   description: req.body.description,
-//   image: req.body.image,
-//   voters: decodedToken._id
+// // const decodedToken = await helpers.verifyToken(req.token);
+// // const newOption = {
+// //   description: req.body.description,
+// //   image: req.body.image,
+// //   voters: decodedToken._id
+// // };
+// // const resultOption = await Option.create(newOption);
+// // const resultUser = await User.findOneAndUpdate(
+// //   { _id: decodedToken._id },
+// //   { $push: { option: resultOption._id } },
+// //   { new: true }
+// // );
+// // res.send({
+// //   message: `New option is created`,
+// //   newOption: newOption,
+// //   resultOption: resultOption,
+// //   resultUser: {
+// //     _id: resultUser._id,
+// //     id: resultUser.id,
+// //     fullName: resultUser.fullName,
+// //     email: resultUser.email
+// //   }
 // };
-// const resultOption = await Option.create(newOption);
-// const resultUser = await User.findOneAndUpdate(
-//   { _id: decodedToken._id },
-//   { $push: { option: resultOption._id } },
-//   { new: true }
-// );
-// res.send({
-//   message: `New option is created`,
-//   newOption: newOption,
-//   resultOption: resultOption,
-//   resultUser: {
-//     _id: resultUser._id,
-//     id: resultUser.id,
-//     fullName: resultUser.fullName,
-//     email: resultUser.email
-//   }
-// });
