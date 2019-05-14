@@ -12,8 +12,8 @@ router.post("/", helper.isAuthenticated, Controller.createNewPoll);
 // (GET) Get Poll By Poll Id
 router.get("/:id", Controller.getPollByPollId);
 
-// (GET) Get Polls By User Id
-router.get("/user/:id", Controller.getPollsByUserId);
+// (GET) Get Polls By User Modarator _Id
+router.get("/user/:_id", Controller.getPollsByUserId);
 
 // (DELETE) Delete poll by id
 router.delete("/:id", helper.isAuthenticated, Controller.deleteOnePollById);
