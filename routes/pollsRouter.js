@@ -18,4 +18,7 @@ router.get("/user/:id", Controller.getPollsByUserId);
 // (DELETE) Delete poll by id
 router.delete("/:id", helper.isAuthenticated, Controller.deleteOnePollById);
 
+//(PUT) update poll by id
+router.put("/:id", Controller.updatePollbyId);
+
 module.exports = router;

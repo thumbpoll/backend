@@ -4,7 +4,8 @@ module.exports = {
   createNewOption: async (req, res) => {
     try {
       const option = await Option.create({
-        description: req.body.description
+        description: req.body.description,
+        pollId: req.params.pollId
       });
       res.status(200).send({
         message: `Create option success`,
@@ -54,7 +55,7 @@ module.exports = {
   },
   getAllOption: async (req, res) => {
     try {
-      const getOption = await Option.find();
+      const getOption = await Option.find().populate();
       res.status(200).send({
         message: `Get option error`,
         data: getOption
