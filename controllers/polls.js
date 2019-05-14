@@ -1,5 +1,6 @@
 const Poll = require("../models/polls");
 const User = require("../models/users");
+const Option = require("../models/options");
 const helpers = require("../helpers");
 
 module.exports = {
@@ -81,7 +82,7 @@ module.exports = {
     const pollFound = await Poll.findOne({ id: Number(req.params.id) });
 
     if (pollFound) {
-      console.log(pollFound);
+      // console.log(pollFound);
       const resultPoll = await Poll.findOneAndRemove({
         id: Number(req.params.id)
       });
@@ -90,6 +91,10 @@ module.exports = {
         { _id: pollFound.moderator },
         { $pull: { polls: pollFound._id } }
       );
+
+      const deleteOnePollOption = await Option.remove({
+        pollId: pollFound._id
+      });
 
       res.send({
         message: "Delete one poll by id",
