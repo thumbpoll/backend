@@ -12,7 +12,7 @@ mongoose.connect(
   },
   function(err) {
     if (err) {
-      return console.log("failed");
+      return console.log(err);
     }
   }
 );
