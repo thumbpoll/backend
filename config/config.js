@@ -5,8 +5,16 @@ const MONGODB_CONNECTION =
 
 mongoose.set("useCreateIndex", true);
 
-mongoose.connect(MONGODB_CONNECTION, {
-  useNewUrlParser: true
-});
+mongoose.connect(
+  MONGODB_CONNECTION,
+  {
+    useNewUrlParser: true
+  },
+  function(err) {
+    if (err) {
+      return console.log("failed");
+    }
+  }
+);
 
 module.exports = mongoose;

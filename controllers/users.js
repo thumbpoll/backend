@@ -109,12 +109,19 @@ const usersControllers = {
   },
   // GET ALL USERS
   getAllUsers: async (req, res) => {
-    const users = await User.find({}, "-password -salt");
+    try {
+      const users = await User.find({}, "-password -salt");
 
-    res.status(200).send({
-      message: "Get all users",
-      users: users
-    });
+      res.status(200).send({
+        message: "Get all users",
+        users: users
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({
+        message: `Get all users error`
+      });
+    }
   },
 
   // GET ONE USER BY ID
