@@ -29,7 +29,7 @@ module.exports = {
         id: resultUser.id,
         fullName: resultUser.fullName,
         email: resultUser.email
-      }``
+      }
     });
   },
   // GET ALL POLL
@@ -83,7 +83,6 @@ module.exports = {
     const pollFound = await Poll.findOne({ id: Number(req.params.id) });
 
     if (pollFound) {
-      // console.log(pollFound);
       const resultPoll = await Poll.findOneAndRemove({
         id: Number(req.params.id)
       });
