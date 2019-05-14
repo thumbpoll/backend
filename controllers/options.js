@@ -31,7 +31,7 @@ module.exports = {
     try {
       const getOption = await Option.find();
       res.status(200).send({
-        message: `Get option error`,
+        message: `Get option success`,
         data: getOption
       });
     } catch (error) {
