@@ -28,7 +28,7 @@ module.exports = {
         id: resultUser.id,
         fullName: resultUser.fullName,
         email: resultUser.email
-      }
+      }``
     });
   },
   // GET ALL POLL
