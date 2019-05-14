@@ -45,7 +45,7 @@ module.exports = {
   getPollByPollId: async (req, res) => {
     const pollFound = await Poll.findOne({
       id: Number(req.params.id)
-    }).populate("moderator options", "-password -polls");
+    }).populate("moderator options", "-password -polls -createdAt -updatedAt");
 
     if (pollFound) {
       res.send({
@@ -58,21 +58,24 @@ module.exports = {
       });
     }
   },
-  // GET POLLS BY USER ID
+  // GET POLLS BY MODERATOR _ID
   getPollsByUserId: async (req, res) => {
-    const userFound = await User.findOne({
-      id: Number(req.params.id)
-    }).populate("polls", "-moderator");
+    moderator_Id = req.params._id;
 
-    if (userFound) {
+    const pollFound = await Poll.find({
+      moderator: moderator_Id
+    }).populate("moderator options", "-password -polls -createdAt -updatedAt");
+
+    console.log(pollFound);
+
+    if (pollFound) {
       res.send({
-        message: "Get poll by user id",
-        ...userFound._doc,
-        password: "HIDDEN"
+        message: "Get poll by poll id",
+        polls: pollFound
       });
     } else {
       res.send({
-        message: "User id not found"
+        message: "Poll id not found"
       });
     }
   },
