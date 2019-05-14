@@ -1,15 +1,28 @@
 const Option = require("../models/options");
+const User = require("../models/users");
+const Poll = require("../models/polls");
+const helpers = require("../helpers");
 
 module.exports = {
   createNewOption: async (req, res) => {
     try {
-      const option = await Option.create({
+      const newOption = {
         description: req.body.description,
-        pollId: req.params.pollId
-      });
+        pollId: req.body.pollId
+      };
+      const resultOption = await Option.create(newOption);
+
+      const resultPoll = await Poll.findOneAndUpdate(
+        { _id: req.body.pollId },
+        { $push: { options: resultOption._id } },
+        { new: true }
+      );
+      console.log(resultPoll);
+
       res.status(200).send({
         message: `Create option success`,
-        data: option
+        newOption: newOption,
+        resultOption: resultOption
       });
     } catch (error) {
       res.status(500).send({
@@ -17,45 +30,96 @@ module.exports = {
       });
     }
   },
-  updateOption: async (req, res) => {
-    try {
-      const updateOption = await Option.update(
-        {
-          id: req.params.id
-        },
-        {
-          $set: {
-            description: req.body.description
-          }
-        }
-      );
+  //   ,
+  //   updateOption: async (req, res) => {
+  //     try {
+  //       const updateOption = await Option.update(
+  //         {
+  //           id: req.params.id
+  //         },
+  //         {
+  //           $set: {
+  //             description: req.body.description
+  //           }
+  //         }
+  //       );
 
-      res.status(200).send({
-        message: `Update option success`,
-        data: updateOption
-      });
-    } catch (error) {
-      res.status(500).send({
-        message: `Update option error`
-      });
-    }
-  },
-  deleteOneOption: async (req, res) => {
-    try {
-      const deleteOption = await Option.deleteOne({ id: req.params.id });
-      res.status(200).send({
-        message: `Delete option success`,
-        data: deleteOption
-      });
-    } catch (error) {
-      res.status(500).send({
-        message: `Delete option error`
-      });
-    }
-  },
+  //       res.status(200).send({
+  //         message: `Update option success`,
+  //         data: updateOption
+  //       });
+  //     } catch (error) {
+  //       res.status(500).send({
+  //         message: `Update option error`
+  //       });
+  //     }
+  //   },
+  //   deleteOneOption: async (req, res) => {
+  //     try {
+  //       const deleteOption = await Option.deleteOne({ id: req.params.id });
+  //       res.status(200).send({
+  //         message: `Delete option success`,
+  //         data: deleteOption
+  //       });
+  //     } catch (error) {
+  //       res.status(500).send({
+  //         message: `Delete option error`
+  //       });
+  //     }
+  //   },
+  //   getAllOption: async (req, res) => {
+  //     try {
+  //       const getOption = await Option.find().populate();
+  //       res.status(200).send({
+  //         message: `Get option error`,
+  //         data: getOption
+  //       });
+  //     } catch (error) {
+  //       res.status(500).send({
+  //         message: `Get option error`
+  //       });
+  //     }
+  //
+
+  //   }
+  // updateOption: async (req, res) => {
+  //   try {
+  //     const updateOption = await Option.update(
+  //       {
+  //         id: req.params.id
+  //       },
+  //       {
+  //         $set: {
+  //           description: req.body.description
+  //         }
+  //       }
+  //     );
+  //     res.status(200).send({
+  //       message: `Update option success`,
+  //       data: updateOption
+  //     });
+  //   } catch (error) {
+  //     res.status(500).send({
+  //       message: `Update option error`
+  //     });
+  //   }
+  // },
+  // deleteOneOption: async (req, res) => {
+  //   try {
+  //     const deleteOption = await Option.deleteOne({ id: req.params.id });
+  //     res.status(200).send({
+  //       message: `Delete option success`,
+  //       data: deleteOption
+  //     });
+  //   } catch (error) {
+  //     res.status(500).send({
+  //       message: `Delete option error`
+  //     });
+  //   }
+  // }
   getAllOption: async (req, res) => {
     try {
-      const getOption = await Option.find().populate();
+      const getOption = await Option.find();
       res.status(200).send({
         message: `Get option error`,
         data: getOption

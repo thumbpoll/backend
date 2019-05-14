@@ -36,8 +36,7 @@ module.exports = {
     res.send({
       message: "Get all polls",
       polls: await Poll.find({}).populate(
-        "moderator",
-        "options",
+        "moderator options",
         "-password -polls"
       )
     });
@@ -46,7 +45,7 @@ module.exports = {
   getPollByPollId: async (req, res) => {
     const pollFound = await Poll.findOne({
       id: Number(req.params.id)
-    }).populate("moderator", "-password -polls");
+    }).populate("moderator options", "-password -polls");
 
     if (pollFound) {
       res.send({
