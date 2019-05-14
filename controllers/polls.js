@@ -66,8 +66,6 @@ module.exports = {
       moderator: moderator_Id
     }).populate("moderator options", "-password -polls -createdAt -updatedAt");
 
-    console.log(pollFound);
-
     if (pollFound) {
       res.send({
         message: "Get poll by poll id",
