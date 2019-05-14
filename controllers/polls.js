@@ -78,7 +78,7 @@ module.exports = {
       });
     }
   },
-  // DELETE ONE POLL BY ID
+  // DELETE ONE POLL BY Id
   deleteOnePollById: async (req, res) => {
     const pollFound = await Poll.findOne({ id: Number(req.params.id) });
 
