@@ -6,31 +6,37 @@ const helpers = require("../helpers");
 module.exports = {
   // CREATE NEW POLL
   createNewPoll: async (req, res) => {
-    const decodedToken = await helpers.verifyToken(req.token);
+    try {
+      const decodedToken = await helpers.verifyToken(req.token);
 
-    const newPoll = {
-      moderator: decodedToken._id,
-      title: req.body.title
-    };
+      const newPoll = {
+        moderator: decodedToken._id,
+        title: req.body.title
+      };
 
-    const resultPoll = await Poll.create(newPoll);
+      const resultPoll = await Poll.create(newPoll);
 
-    const resultUser = await User.findOneAndUpdate(
-      { _id: decodedToken._id },
-      { $push: { polls: resultPoll._id } },
-      { new: true }
-    );
-    res.send({
-      message: "New poll is created",
-      newPoll: newPoll,
-      resultPoll: resultPoll,
-      resultUser: {
-        _id: resultUser._id,
-        id: resultUser.id,
-        fullName: resultUser.fullName,
-        email: resultUser.email
-      }
-    });
+      const resultUser = await User.findOneAndUpdate(
+        { _id: decodedToken._id },
+        { $push: { polls: resultPoll._id } },
+        { new: true }
+      );
+      res.send({
+        message: "New poll is created",
+        newPoll: newPoll,
+        resultPoll: resultPoll,
+        resultUser: {
+          _id: resultUser._id,
+          id: resultUser.id,
+          fullName: resultUser.fullName,
+          email: resultUser.email
+        }
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: `Create new poll error`
+      });
+    }
   },
   // GET ALL POLL
   getAllPolls: async (req, res) => {
