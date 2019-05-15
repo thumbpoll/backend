@@ -39,7 +39,6 @@ yarn start
 | `/users`          | GET    | Get all users         |                 |  |
 | `/users/:id`      | PUT    | Update one user by id |                 |  |
 | `/users/:id`      | DELETE | Delete one user by id |
-| `/users/logout`   | GET    | logout from dashboard |
 
 Example Data users:
 
@@ -58,14 +57,14 @@ Example Data users:
 
 ## Polls
 
-| Endpoint         | Method | Description           | isAuthenticated |
-| ---------------- | ------ | --------------------- | --------------- |
-| `/polls/`        | GET    | Get All Polls         | YES             |
-| `/polls`         | POST   | Create new polls      | YES             |
-| `/polls/:id`     | GET    | Get one poll by id    | YES             |
-| `/polls/:id`     | DELETE | Delete one poll by id | YES             |
-| `/polls/:id`     | PUT    | Update one poll by id | YES             |
-| `polls/user/:id` | GET    | Get Poll by author id | YES             |
+| Endpoint          | Method | Description           | isAuthenticated |
+| ----------------- | ------ | --------------------- | --------------- |
+| `/polls/`         | GET    | Get All Polls         | YES             |
+| `/polls`          | POST   | Create new polls      | YES             |
+| `/polls/:id`      | GET    | Get one poll by id    | YES             |
+| `/polls/:id`      | DELETE | Delete one poll by id | YES             |
+| `/polls/:id`      | PUT    | Update one poll by id | YES             |
+| `polls/user/:_id` | GET    | Get Poll by author id | YES             |
 
 Example Data:
 
@@ -123,7 +122,7 @@ Example Data:
 | `/options`     | POST   | Create new options | YES             |
 | `/options/:id` | PUT    | Edit options       | YES             |
 
-Example Data aa :
+Example Data :
 
 ```json
 {
