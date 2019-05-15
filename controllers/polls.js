@@ -198,5 +198,30 @@ module.exports = {
         message: "Vote Error. Option Not Found"
       });
     }
+  },
+  countVoters: async (req, res) => {
+    try {
+      let totalVotes = 0;
+      const foundOption = await Option.find({ pollId: req.params._id });
+      const countVoters = foundOption.map(item => {
+        totalVotes += item.voters.length;
+        return (num = {
+          desc: item.description,
+          votes: item.voters.length
+        });
+      });
+
+      res.status(200).send({
+        message: "Count Voters Success",
+        pollId: req.params._id,
+        result: countVoters,
+        totalVotes: totalVotes
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: "Count Error",
+        error: error
+      });
+    }
   }
 };

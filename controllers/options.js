@@ -2,6 +2,7 @@ const Option = require("../models/options");
 const Poll = require("../models/polls");
 
 module.exports = {
+  // CREATE NEW OPTION
   createNewOption: async (req, res) => {
     try {
       const newOption = {
@@ -27,6 +28,7 @@ module.exports = {
       });
     }
   },
+  // GET ALL OPTION
   getAllOption: async (req, res) => {
     try {
       const getOption = await Option.find();
