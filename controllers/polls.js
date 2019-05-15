@@ -40,75 +40,105 @@ module.exports = {
   },
   // GET ALL POLL
   getAllPolls: async (req, res) => {
-    res.send({
-      message: "Get all polls",
-      polls: await Poll.find({}).populate(
-        "moderator options",
-        "-password -polls"
-      )
-    });
+    try {
+      res.send({
+        message: "Get all polls",
+        polls: await Poll.find({}).populate(
+          "moderator options",
+          "-password -polls"
+        )
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: `Get all polls error`
+      });
+    }
   },
   // GET POLL BY POLL ID
   getPollByPollId: async (req, res) => {
-    const pollFound = await Poll.findOne({
-      id: Number(req.params.id)
-    }).populate("moderator options", "-password -polls -createdAt -updatedAt");
+    try {
+      const pollFound = await Poll.findOne({
+        id: Number(req.params.id)
+      }).populate(
+        "moderator options",
+        "-password -polls -createdAt -updatedAt"
+      );
 
-    if (pollFound) {
-      res.send({
-        message: "Get poll by poll id",
-        polls: pollFound
-      });
-    } else {
-      res.send({
-        message: "Poll id not found"
+      if (pollFound) {
+        res.send({
+          message: "Get poll by poll id",
+          polls: pollFound
+        });
+      } else {
+        res.send({
+          message: "Poll id not found"
+        });
+      }
+    } catch (error) {
+      res.status(500).send({
+        message: `Get Poll By Id error`
       });
     }
   },
   // GET POLLS BY MODERATOR _ID
   getPollsByUserId: async (req, res) => {
-    moderator_Id = req.params._id;
+    try {
+      moderator_Id = req.params._id;
 
-    const pollFound = await Poll.find({
-      moderator: moderator_Id
-    }).populate("moderator options", "-password -polls -createdAt -updatedAt");
+      const pollFound = await Poll.find({
+        moderator: moderator_Id
+      }).populate(
+        "moderator options",
+        "-password -polls -createdAt -updatedAt"
+      );
 
-    if (pollFound) {
-      res.send({
-        message: "Get poll by poll id",
-        polls: pollFound
-      });
-    } else {
-      res.send({
-        message: "Poll id not found"
+      if (pollFound) {
+        res.send({
+          message: "Get poll by poll id",
+          polls: pollFound
+        });
+      } else {
+        res.send({
+          message: "Poll id not found"
+        });
+      }
+    } catch (error) {
+      res.status(500).send({
+        message: `Get Polls by Moderator error`
       });
     }
   },
   // DELETE ONE POLL BY Id
   deleteOnePollById: async (req, res) => {
-    const pollFound = await Poll.findOne({ id: Number(req.params.id) });
+    try {
+      const pollFound = await Poll.findOne({ id: Number(req.params.id) });
 
-    if (pollFound) {
-      const resultPoll = await Poll.findOneAndRemove({
-        id: Number(req.params.id)
-      });
+      if (pollFound) {
+        const resultPoll = await Poll.findOneAndRemove({
+          id: Number(req.params.id)
+        });
 
-      const resultArrayPoll = await User.findOneAndUpdate(
-        { _id: pollFound.moderator },
-        { $pull: { polls: pollFound._id } }
-      );
+        const resultArrayPoll = await User.findOneAndUpdate(
+          { _id: pollFound.moderator },
+          { $pull: { polls: pollFound._id } }
+        );
 
-      const deleteOnePollOption = await Option.remove({
-        pollId: pollFound._id
-      });
+        const deleteOnePollOption = await Option.remove({
+          pollId: pollFound._id
+        });
 
-      res.send({
-        message: "Delete one poll by id",
-        poll: resultPoll
-      });
-    } else {
-      res.send({
-        message: "Id poll is not found"
+        res.send({
+          message: "Delete one poll by id",
+          poll: resultPoll
+        });
+      } else {
+        res.send({
+          message: "Id poll is not found"
+        });
+      }
+    } catch (error) {
+      res.status(500).send({
+        message: `Delete poll by id error`
       });
     }
   },
