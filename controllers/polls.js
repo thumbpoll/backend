@@ -119,12 +119,47 @@ module.exports = {
       );
 
       res.status(200).send({
-        message: `Update Poll success`,
+        message: `Update Poll Success`,
         data: pollFound
       });
     } catch (error) {
       res.status(500).send({
         message: `Update Polls Error`
+      });
+    }
+  },
+  vote: async (req, res) => {
+    try {
+      const decodedToken = req.decoded;
+
+      const pollId = req.params._id;
+      const optionId = req.body.optionId;
+
+      const foundOption = await Option.findOne({
+        $and: [{ pollId: pollId }, { _id: optionId }]
+      });
+
+      if (foundOption.voters.includes(decodedToken._id)) {
+        return res.send({
+          message: "You have voted"
+        });
+      } else {
+        const resultVote = await Option.findOneAndUpdate(
+          { $and: [{ pollId: pollId }, { _id: optionId }] },
+          { $push: { voters: decodedToken._id } },
+          { new: true }
+        );
+        res.status(200).send({
+          message: "Vote Success",
+          data: {
+            user: decodedToken,
+            data: resultVote
+          }
+        });
+      }
+    } catch (error) {
+      res.status(500).send({
+        message: "Vote Error. Option Not Found"
       });
     }
   }
