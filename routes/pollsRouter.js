@@ -10,16 +10,16 @@ router.get("/", Controller.getAllPolls);
 router.post("/", helper.isAuthenticated, Controller.createNewPoll);
 
 // (GET) Get Poll By Poll Id
-router.get("/:id", Controller.getPollByPollId);
+router.get("/:id", helper.isAuthenticated, Controller.getPollByPollId);
 
 // (GET) Get Polls By User Modarator _Id
-router.get("/user/:_id", Controller.getPollsByUserId);
+router.get("/user/:_id", helper.isAuthenticated, Controller.getPollsByUserId);
 
 // (DELETE) Delete poll by id
 router.delete("/:id", helper.isAuthenticated, Controller.deleteOnePollById);
 
 // (PUT) Update poll by id
-router.put("/:id", Controller.updatePollbyId);
+router.put("/:id", helper.isAuthenticated, Controller.updatePollbyId);
 
 // (PUT) Vote poll
 router.put("/vote/:_id", helper.isAuthenticated, Controller.vote);

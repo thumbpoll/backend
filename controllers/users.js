@@ -59,12 +59,12 @@ const usersControllers = {
             }
           });
         } else {
-          res.send({
+          res.status(500).send({
             message: "Login failed because password doesn't match"
           });
         }
       } else {
-        res.send({
+        res.status(500).send({
           message: "Login failed because user is not found"
         });
       }
@@ -97,7 +97,7 @@ const usersControllers = {
           user: user
         });
       } else {
-        res.send({
+        res.status(500).send({
           message: "Token is invalid"
         });
       }
@@ -156,7 +156,7 @@ const usersControllers = {
           user: user
         });
       } else {
-        res.send({
+        res.status(500).send({
           message: "User is not found"
         });
       }
@@ -194,7 +194,7 @@ const usersControllers = {
           user: user
         });
       } else {
-        res.send({
+        res.status(500).send({
           message: "User is not found"
         });
       }

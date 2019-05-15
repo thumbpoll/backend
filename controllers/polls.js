@@ -70,7 +70,7 @@ module.exports = {
           polls: pollFound
         });
       } else {
-        res.send({
+        res.status(500).send({
           message: "Poll id not found"
         });
       }
@@ -98,7 +98,7 @@ module.exports = {
           polls: pollFound
         });
       } else {
-        res.send({
+        res.status(500).send({
           message: "Poll id not found"
         });
       }
@@ -132,7 +132,7 @@ module.exports = {
           poll: resultPoll
         });
       } else {
-        res.send({
+        res.status(500).send({
           message: "Id poll is not found"
         });
       }
