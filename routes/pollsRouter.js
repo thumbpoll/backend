@@ -22,7 +22,7 @@ router.delete("/:id", helper.isAuthenticated, Controller.deleteOnePollById);
 router.put("/:id", Controller.updatePollbyId);
 
 // (PUT) Vote poll
-router.put("/vote/:_id", helper.isAuthenticated, Controller.vote);
+router.put("/vote/", helper.isAuthenticated, Controller.vote);
 
 // (PUT) Count voters
 router.get("/vote/count/:_id", Controller.countVoters);
