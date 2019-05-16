@@ -166,7 +166,7 @@ module.exports = {
   countVoters: async (req, res) => {
     try {
       let totalVotes = 0;
-      const foundOption = await Option.find({ pollId: req.params._id });
+      const foundOption = await Option.find({ pollId: req.body.pollId });
       const countVoters = foundOption.map(item => {
         totalVotes += item.voters.length;
         return (num = {
@@ -177,7 +177,7 @@ module.exports = {
 
       res.status(200).send({
         message: "Count Voters Success",
-        pollId: req.params._id,
+        pollId: req.body.pollId,
         result: countVoters,
         totalVotes: totalVotes
       });
