@@ -174,7 +174,13 @@ module.exports = {
         $and: [{ pollId: pollId }, { _id: optionId }]
       });
 
-      if (foundOption.voters.includes(decodedToken._id)) {
+      const foundVoters = await Option.find({ pollId: pollId });
+
+      const hasil = foundVoters.map(item => {
+        return item.voters.includes(decodedToken._id);
+      });
+
+      if (hasil.includes(true)) {
         return res.send({
           message: "You have voted"
         });
