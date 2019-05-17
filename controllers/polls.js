@@ -45,7 +45,7 @@ module.exports = {
         message: "Get all polls",
         polls: await Poll.find({})
           .populate("moderator options", "-password -polls")
-          .sort([["updatedAt", "descending"]])
+          .sort([["createdAt", "descending"]])
       });
     } catch (error) {
       res.status(500).send({
