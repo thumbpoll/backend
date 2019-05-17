@@ -134,3 +134,34 @@ Example Data :
   "__v": 0
 }
 ```
+
+## Vote
+
+| Endpoint          | Method | Description  | isAuthenticated |
+| ----------------- | ------ | ------------ | --------------- |
+| `vote/:_id`       | PUT    | Vote option  | YES             |
+| `vote/count/:_id` | GET    | Count voters | YES             |
+
+Example Data :
+
+```json
+{
+  "message": "Count Voters Success",
+  "pollId": "5cdaf27a0067d837281a3e11",
+  "result": [
+    {
+      "desc": "Sistem informasi akuntansi",
+      "votes": 3
+    },
+    {
+      "desc": "Aplikasi inventory barang",
+      "votes": 7
+    },
+    {
+      "desc": "Website profil",
+      "votes": 2
+    }
+  ],
+  "totalVotes": 12
+}
+```
