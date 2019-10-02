@@ -1,6 +1,6 @@
 # Thumbpoll Backend
 
-repo for REST API backend (https://thumbpoll.herokkuapp.com)
+repo for REST API backend (https://thumbpoll.herokuapp.com)
 
 ## Setup
 
